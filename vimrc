@@ -33,7 +33,7 @@
 " Enable syntax highlighting
  syntax on
 
- set t_Co=256
+ colorscheme ir_black
 "------------------------------------------------------------
 " Must have options {{{1
 
