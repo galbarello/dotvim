@@ -33,7 +33,7 @@
 " Enable syntax highlighting
  syntax on
 
-
+ set t_Co=256
 "------------------------------------------------------------
 " Must have options {{{1
 
@@ -72,7 +72,18 @@
 " set autowriteall
 
 " Better command-line completion
+" Wildmenu completion {{{
  set wildmenu
+ set wildmode=list:longest
+ set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+ set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
+ set wildignore+=*.luac                           " Lua byte code
+ set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
+ set wildignore+=*.pyc                            " Python byte code
+ set wildignore+=*.spl                            " compiled spelling word lists
+ set wildignore+=*.sw?                            " Vim swap files
+ set wildignore+=*.DS_Store?                      " OSX bullshit
+" }}}
 
 " Show partial commands in the last line of the screen
  set showcmd
@@ -176,9 +187,64 @@ set mouse=a
 " which is the default
  map Y y$
 
+ let mapleader=","
+ " mostrar caracteres especiales
+ set list
+ set listchars=tab:▸\ ,eol:¬
+
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
  nnoremap <C-L> :nohl<CR><C-L>
 "
 "
+" statusline {{{
+   set statusline=
+   set statusline+=%f\ %{SyntasticStatuslineFlag()}
+   set statusline+=%{FugitiveStatuslineShort()}
+   set statusline+=%<%h%m%r%=%-0.(%{HasPaste()}\%2*%{HasNeoComplcache()}\ L%03l/%L\ C%02c%V%)\%h%m%r%=%-16(\B%{BufferWidget()}\ %y%)
+   set statusline+=%3*%P%=%{FileTime()}
+   set rulerformat=%15(%c%V\ %p%%%)
+   fun! FileTime() "{{{
+        let ext=tolower(expand("%:e"))
+        let fname=tolower(expand('%<'))
+        let filename=fname . '.' . ext
+        let msg=""
+        let msg=msg." ".strftime("(Mod %b,%d %y %H:%M:%S)",getftime(filename))
+        return msg
+   endfunction
+    "}}}
+   fun! HasPaste() "{{{
+       return &paste ? "paste" : ""
+   endf "}}}
+   fun! HasNeoComplcache() "{{{
+      return !neocomplcache#is_locked() ? "nCC" : ""
+   endf "}}}
+   fun! FugitiveStatuslineShort() "{{{
+      return substitute(fugitive#statusline(),"master","M","g")
+   endf "}}}
+" }}}
+" NERDtree {{{
+   nnoremap <silent><leader>n :NERDTreeToggle<CR>
+   let NERDTreeShowBookmarks=1
+" }}}
+" Syntastic {{{
+   let g:syntastic_enable_signs = 0
+   let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
+   let g:syntastic_mode_map = { 'mode': 'active',
+                     \ 'active_filetypes': [],
+                     \ 'passive_filetypes': ['tex','html'] }
+" }}}
+" neocomplcache {{{
+    let g:neocomplcache_enable_at_startup = 1
+    "let g:neocomplcache_snippets_disable_runtime_snippets = 1
+    let g:neocomplcache_snippets_dir='~/.vim/bundle/snipmate-snippets/snippets'
+    nnoremap <silent><leader>nt :NeoComplCacheToggle<CR>
+" }}}
+" BufferWidget {{{
+    let g:buffer_widget_view='bars'
+" }}}
+" Ack {{{
+  " you have to install ack
+  nn <leader>a :Ack! --nobinary <cword><CR>
+" }}}
 "------------------------------------------------------------
