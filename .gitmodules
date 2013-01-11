@@ -25,4 +25,7 @@
 
 [submodule "bundle/colorschemes"]
 	path = bundle/colorschemes
-	url = git@github.com:flazz/vim-colorschemes.git
+	url = https://github.com/flazz/vim-colorschemes.git
+[submodule "bundle/csharp"]
+	path = bundle/csharp
+	url = https://github.com/galbarello/csharp.vim.git

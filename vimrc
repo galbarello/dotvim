@@ -160,7 +160,6 @@ set mouse=a
 " Use <F11> to toggle between 'paste' and 'nopaste'
  set pastetoggle=<F11>
 
-
 "------------------------------------------------------------
 " Indentation options {{{1
 
@@ -189,7 +188,6 @@ set mouse=a
 
  let mapleader=","
  " mostrar caracteres especiales
- set list
  set listchars=tab:▸\ ,eol:¬
 
 " Map <C-L> (redraw screen) to also turn off search highlighting until the
@@ -228,7 +226,8 @@ set mouse=a
    let NERDTreeShowBookmarks=1
 " }}}
 " Syntastic {{{
-   let g:syntastic_enable_signs = 0
+  let g:syntastic_enable_signs=1
+  let g:syntastic_auto_loc_list=1
    let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
    let g:syntastic_mode_map = { 'mode': 'active',
                      \ 'active_filetypes': [],
