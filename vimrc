@@ -189,8 +189,9 @@ set mouse=a
  let mapleader=","
  " mostrar caracteres especiales
  set listchars=tab:▸\ ,eol:¬
-
-" Map <C-L> (redraw screen) to also turn off search highlighting until the
+ nmap <leader>l :set list!<CR>
+ 
+ "Map <C-L> (redraw screen) to also turn off search highlighting until the
 " next search
  nnoremap <C-L> :nohl<CR><C-L>
 "
