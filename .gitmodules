@@ -38,3 +38,9 @@
 [submodule "bundle/endwise"]
 	path = bundle/endwise
 	url = https://github.com/tpope/vim-endwise.git
+[submodule "bundle/taglist"]
+	path = bundle/taglist
+	url = https://github.com/int3/vim-taglist-plus.git
+[submodule "bundle/rails"]
+	path = bundle/rails
+	url = https://github.com/tpope/vim-rails.git

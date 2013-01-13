@@ -1,3 +1,4 @@
+" o
 " URL: http://vim.wikia.com/wiki/Example_vimrc
 " Authors: http://vim.wikia.com/wiki/Vim_on_Freenode
 " Description: A minimal, but feature rich, example .vimrc. If you are a
@@ -159,7 +160,8 @@ set mouse=a
 
 " Use <F11> to toggle between 'paste' and 'nopaste'
  set pastetoggle=<F11>
-
+ 
+ set grepprg=ack
 "------------------------------------------------------------
 " Indentation options {{{1
 
